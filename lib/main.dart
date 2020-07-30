@@ -1,6 +1,8 @@
 import 'package:easyscan/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'Utils/constants.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -11,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'EasyScan',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: primaryColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomeScreen(),

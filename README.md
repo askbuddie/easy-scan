@@ -38,12 +38,12 @@ flutter run
 
 You can `fork` the project.
 
-[Fork](https://github.com/askbuddie/EasyScan/fork)
+[Fork](https://github.com/askbuddie/easy-scan/fork)
 
 You can clone the whole project.
 
 ```
-git clone https://github.com/askbuddie/EasyScan.git
+git clone https://github.com/askbuddie/easy-scan.git
 ```
  
 ## Demo
@@ -66,7 +66,7 @@ List of all Contributors:
 
 This project is to help you easily scan you documents via camera or the images and process them into a pdf file. If you want to contribute, pull requests are always welcome.Pull request to add features rules.
 
-- [Fork](https://github.com/askbuddie/EasyScan/fork) the project
+- [Fork](https://github.com/askbuddie/easy-scan/fork) the project
 - Add a `feature-branch` and add your features
 - Send pull request and wait to merge.
 

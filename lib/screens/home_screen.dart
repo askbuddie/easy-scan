@@ -14,9 +14,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // ignore: unused_field
   File _imageFile;
-  List<FileModel> _galleryImageFile;
-  String img;
+  List<FileModel> _galleryImageFiles;
+  // ignore: unused_field
+  String _img;
   FileModel model;
+  List<String> _selectedImages = [];
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
@@ -67,9 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: () {
                   Navigator.pop(context);
                   setState(() {
-                    model = _galleryImageFile[1];
+                    model = _galleryImageFiles[1];
                   });
-                  _showbottomsheet(context);
+                  _showbottomsheet(_scaffoldKey.currentContext);
                 },
                 leading: Icon(Icons.image),
                 title: Text("From Gallery")),
@@ -97,7 +99,8 @@ class _HomeScreenState extends State<HomeScreen> {
   _showbottomsheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      builder: (_) => model == null
+      // ignore: unrelated_type_equality_checks
+      builder: (_) => model == null && model.files == 0
           ? Container(
               child: Center(child: Text('nothing to show')),
             )
@@ -111,9 +114,36 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: (_, count) {
                 var singlefile = model.files[count];
                 return GestureDetector(
-                  onLongPress: () {},
-                  child: Image.file(
-                    File(singlefile),
+                  onLongPress: () {
+                    _selectedImages.add(_img);
+                    print('$_selectedImages');
+                  },
+                  onTap: () {
+                    setState(() {
+                      _img = singlefile;
+                      // TODO: can display anywhere in project
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: Stack(
+                    children: <Widget>[
+                      Image.file(
+                        File(
+                          singlefile,
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                      Positioned(
+                        top: 5,
+                        right: 10,
+                        child: _selectedImages.contains(_img)
+                            ? Icon(
+                                Icons.check_box,
+                                color: Theme.of(context).primaryColor,
+                              )
+                            : Icon(Icons.check_box_outline_blank),
+                      )
+                    ],
                   ),
                 );
               },
@@ -130,10 +160,10 @@ class _HomeScreenState extends State<HomeScreen> {
   _getimagefromgallery() async {
     var _imagepath = await StoragePath.imagesPath;
     var jsonimg = jsonDecode(_imagepath) as List;
-    _galleryImageFile =
+    _galleryImageFiles =
         jsonimg.map<FileModel>((e) => FileModel.fromJson(e)).toList();
 
-    if (_galleryImageFile != null) img = _galleryImageFile[0].files[0];
-    model = _galleryImageFile[1];
+    if (_galleryImageFiles != null) _img = _galleryImageFiles[0].files[0];
+    model = _galleryImageFiles[1];
   }
 }

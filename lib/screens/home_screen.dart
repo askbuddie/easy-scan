@@ -31,7 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
             iconData: Icons.broken_image,
             color: Colors.red,
             text: 'Scan and convert',
-            textStyle: text_style.copyWith(fontSize: 20),
+            textStyle: text_style.copyWith(
+              fontSize: 20,
+            ),
           ),
           HomeCard(
             onTap: () => Navigator.push(

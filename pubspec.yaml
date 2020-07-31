@@ -13,6 +13,7 @@ dependencies:
   google_fonts: ^1.1.0
   image_picker: ^0.6.7+4
   storage_path: ^0.2.0
+  flutter_image_editor: ^1.2.0
 
 flutter:
   uses-material-design: true

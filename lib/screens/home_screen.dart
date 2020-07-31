@@ -102,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
       // ignore: unrelated_type_equality_checks
       builder: (_) => model == null && model.files == 0
           ? Container(
-              child: Center(child: Text('nothing to show')),
+              child: Center(child: Text('Nothing to show')),
             )
           : GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -121,7 +121,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     setState(() {
                       _img = singlefile;
-                      // TODO: can display anywhere in project
                     });
                     Navigator.pop(context);
                   },
@@ -158,10 +157,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   _getimagefromgallery() async {
-    var _imagepath = await StoragePath.imagesPath;
-    var jsonimg = jsonDecode(_imagepath) as List;
-    _galleryImageFiles =
-        jsonimg.map<FileModel>((e) => FileModel.fromJson(e)).toList();
+    var _imagesPaths = await StoragePath.imagesPath;
+    var _imagesPathsInJson = jsonDecode(_imagesPaths) as List;
+    _galleryImageFiles = _imagesPathsInJson
+        .map<FileModel>((e) => FileModel.fromJson(e))
+        .toList();
 
     if (_galleryImageFiles != null) _img = _galleryImageFiles[0].files[0];
     model = _galleryImageFiles[1];

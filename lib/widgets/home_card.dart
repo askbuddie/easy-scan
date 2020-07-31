@@ -34,9 +34,11 @@ class HomeCard extends StatelessWidget {
               Icon(
                 iconData,
                 color: Colors.white,
+                size: 45,
               ),
             Text(
               text,
+              textAlign: TextAlign.center,
               style: textStyle,
             ),
           ],

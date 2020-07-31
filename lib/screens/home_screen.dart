@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:storage_path/storage_path.dart';
@@ -34,11 +35,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(() {
-            selectedModel = file[0];
-          });
+          bottomSheet(context);
+          setState(() {});
         },
-        child: Icon(Icons.replay),
+        child: Icon(Icons.phonelink_lock),
       ),
       appBar: AppBar(
         title: Text('EasyScan'),
@@ -63,40 +63,46 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 40,
             ),
-            selectedModel == null
-                ? Container()
-                : Container(
-                    height: MediaQuery.of(context).size.height * 0.39,
-                    child: GridView.builder(
-                      // shrinkWrap: true,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4,
-                        crossAxisSpacing: 4,
-                        mainAxisSpacing: 4,
-                      ),
-                      itemCount: selectedModel.files.length,
-                      itemBuilder: (_, count) {
-                        var singlefile = selectedModel.files[count];
-                        return GestureDetector(
-                          onLongPress: () {
-                            setState(() {});
-                          },
-                          onTap: () {
-                            setState(() {
-                              img = singlefile;
-                            });
-                          },
-                          child: Image.file(
-                            File(singlefile),
-                            fit: BoxFit.cover,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
           ],
         ),
       ),
     );
+  }
+
+  bottomSheet(BuildContext context) {
+    return showMaterialModalBottomSheet(
+        context: context,
+        builder: (_, scrollcont) {
+          return selectedModel == null
+              ? Container()
+              : Container(
+                  height: MediaQuery.of(context).size.height * 0.39,
+                  child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                      crossAxisSpacing: 4,
+                      mainAxisSpacing: 4,
+                    ),
+                    itemCount: selectedModel.files.length,
+                    itemBuilder: (_, count) {
+                      var singlefile = selectedModel.files[count];
+                      return GestureDetector(
+                        onLongPress: () {
+                          setState(() {});
+                        },
+                        onTap: () {
+                          setState(() {
+                            img = singlefile;
+                          });
+                        },
+                        child: Image.file(
+                          File(singlefile),
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    },
+                  ),
+                );
+        });
   }
 }

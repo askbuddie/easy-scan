@@ -142,6 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: Theme.of(context).primaryColor,
                               )
                             : Icon(Icons.check_box_outline_blank),
+                        // TODO: multi selection of image bug
                       )
                     ],
                   ),

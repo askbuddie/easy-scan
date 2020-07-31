@@ -67,8 +67,8 @@ List of all Contributors:
 This project is to help you easily scan you documents via camera or the images and process them into a pdf file. If you want to contribute, pull requests are always welcome.Pull request to add features rules.
 
 - [Fork](https://github.com/askbuddie/easy-scan/fork) the project
-- Add a `feature-branch` and add your features
-- Send pull request and wait to merge.
+- Make a `feature-branch` from `dev` and add your features
+- Send pull request to `dev` and wait to merge.
 
 Check the [installation](#installation) section to start contributing to this project.
 

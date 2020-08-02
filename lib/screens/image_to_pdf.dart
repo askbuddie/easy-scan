@@ -1,11 +1,29 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
-class ImageToPdf extends StatelessWidget {
-  const ImageToPdf({Key key}) : super(key: key);
+class ImageToPdf extends StatefulWidget {
+  final File galleryimage;
+  const ImageToPdf({Key key, @required this.galleryimage}) : super(key: key);
 
   @override
+  _ImageToPdfState createState() => _ImageToPdfState();
+}
+
+class _ImageToPdfState extends State<ImageToPdf> {
+  @override
   Widget build(BuildContext context) {
-    //TODO:implement this
-    return Container();
+    return Scaffold(
+      appBar: AppBar(),
+      body: ListView(
+        children: <Widget>[
+          Container(
+            height: 400,
+            width: double.infinity,
+            child: Image.file(widget.galleryimage),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -20,6 +20,7 @@ class _ScanAndConvertState extends State<ScanAndConvert> {
   // ignore: unused_field
   File _imageFile;
 
+  // ignore: unused_element
   Future<void> _showImagePicker() async {
     showDialog(
       context: context,

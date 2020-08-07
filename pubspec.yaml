@@ -1,5 +1,6 @@
 name: EasyScan
-description: A Crossplatform document scanning app that can convert images to pdf in a simple tap.
+description: A Crossplatform document scanning app that can convert images to
+  pdf in a simple tap.
 
 version: 1.0.0+1
 
@@ -9,9 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  pdf: ^1.9.0
+  pdf: ^1.10.0
   google_fonts: ^1.1.0
   image_picker: ^0.6.7+4
 
+dev_dependencies:
+  lint: ^1.2.0
 flutter:
   uses-material-design: true

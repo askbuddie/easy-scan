@@ -14,14 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   // ignore: unused_field
-  File _image;
-  final picker = ImagePicker();
-  Future getImageFromGallery() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    setState(() {
-      _image = File(pickedFile.path);
-    });
-  }
+  
 
   @override
   void initState() {
@@ -49,28 +42,14 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           HomeCard(
-<<<<<<< HEAD
             onTap: () {
-              getImageFromGallery().then((value) {
-                if (_image == null) {
-                  // handling error in home_screen
-                  print('No I image selected');
-                } else {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => ImageToPdf(
-                        galleryimage: _image,
-                      ),
-                    ),
-                  );
-                }
-              });
+              return Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ImageToPdf(),
+                ),
+              );
             },
-=======
-            onTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (_) => const ImageToPdf())),
->>>>>>> 1ec911aeba5891f468f02f2adae1b5f4405097dc
             iconData: Icons.picture_as_pdf,
             color: Colors.green,
             text: 'Image to pdf',

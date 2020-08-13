@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('EasyScan'),
+        title: const Text('EasyScan'),
       ),
       body: GridView.count(
         crossAxisCount: 2,
@@ -44,11 +44,12 @@ class _HomeScreenState extends State<HomeScreen> {
             iconData: Icons.broken_image,
             color: Colors.red,
             text: 'Scan and convert',
-            textStyle: text_style.copyWith(
+            textStyle: textStyle.copyWith(
               fontSize: 20,
             ),
           ),
           HomeCard(
+<<<<<<< HEAD
             onTap: () {
               getImageFromGallery().then((value) {
                 if (_image == null) {
@@ -66,10 +67,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 }
               });
             },
+=======
+            onTap: () => Navigator.push(
+                context, MaterialPageRoute(builder: (_) => const ImageToPdf())),
+>>>>>>> 1ec911aeba5891f468f02f2adae1b5f4405097dc
             iconData: Icons.picture_as_pdf,
             color: Colors.green,
             text: 'Image to pdf',
-            textStyle: text_style.copyWith(fontSize: 20),
+            textStyle: textStyle.copyWith(fontSize: 20),
           ),
         ],
       ),

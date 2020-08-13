@@ -1,8 +1,9 @@
 import 'dart:io';
 
-import 'package:EasyScan/Utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
+import 'package:EasyScan/Utils/constants.dart' show textStyle;
 
 class ScanAndConvert extends StatefulWidget {
   @override
@@ -19,12 +20,18 @@ class _ScanAndConvertState extends State<ScanAndConvert> {
   // ignore: unused_field
   File _imageFile;
 
-  void _showImagePicker() async {
+  // ignore: unused_element
+  Future<void> _showImagePicker() async {
     showDialog(
       context: context,
       builder: (context) {
         return SimpleDialog(
           contentPadding: EdgeInsets.zero,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20.0),
+                bottomRight: Radius.circular(20.0)),
+          ),
           children: <Widget>[
             Container(
               alignment: Alignment.center,
@@ -32,7 +39,7 @@ class _ScanAndConvertState extends State<ScanAndConvert> {
               color: Theme.of(context).primaryColor,
               child: Text(
                 'Choose Source',
-                style: text_style.copyWith(
+                style: textStyle.copyWith(
                   fontSize: 20,
                 ),
                 textAlign: TextAlign.center,
@@ -40,33 +47,28 @@ class _ScanAndConvertState extends State<ScanAndConvert> {
             ),
             ListTile(
               onTap: _getImageFromSource,
-              leading: Icon(Icons.camera_alt),
-              title: Text("From Camera"),
+              leading: const Icon(Icons.camera_alt),
+              title: const Text("From Camera"),
             ),
             ListTile(
                 onTap: () {
                   _getImageFromSource(ImageSource.gallery);
                 },
-                leading: Icon(Icons.image),
-                title: Text("From Gallery")),
+                leading: const Icon(Icons.image),
+                title: const Text("From Gallery")),
           ],
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomLeft: const Radius.circular(20.0),
-                bottomRight: const Radius.circular(20.0)),
-          ),
         );
       },
     );
   }
 
-  void _getImageFromSource([ImageSource source]) async {
+  Future<void> _getImageFromSource([ImageSource source]) async {
     Navigator.pop(context);
-    var _pickedFile =
+    final _pickedFile =
         await ImagePicker().getImage(source: source ?? ImageSource.camera);
     if (_pickedFile != null) {
       setState(() {
-        this._imageFile = File(_pickedFile.path);
+        _imageFile = File(_pickedFile.path);
       });
     }
   }

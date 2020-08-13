@@ -1,11 +1,9 @@
-import 'dart:io';
 
 import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/screens/image_to_pdf.dart';
 import 'package:EasyScan/screens/scan_and_convert.dart';
 import 'package:EasyScan/widgets/home_card.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

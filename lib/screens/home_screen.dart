@@ -1,5 +1,5 @@
 import 'package:EasyScan/Utils/constants.dart';
-import 'package:EasyScan/screens/image_to_pdf.dart';
+import 'package:EasyScan/screens/images_to_pdf.dart';
 import 'package:EasyScan/screens/scan_and_convert.dart';
 import 'package:EasyScan/widgets/home_card.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           HomeCard(
             onTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (_) => const ImageToPdf())),
+                context, MaterialPageRoute(builder: (_) => ImageToPdf())),
             iconData: Icons.picture_as_pdf,
             color: Colors.green,
             text: 'Image to pdf',

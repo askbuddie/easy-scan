@@ -1,9 +1,6 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
-import 'package:EasyScan/Utils/constants.dart' show textStyle;
 
 class ScanAndConvert extends StatefulWidget {
   @override
@@ -11,65 +8,36 @@ class ScanAndConvert extends StatefulWidget {
 }
 
 class _ScanAndConvertState extends State<ScanAndConvert> {
-  @override
-  Widget build(BuildContext context) {
-    //TODO:implement this
-    return Container();
+  get getBody {
+    if (_imageFile == null)
+      return Center(child: CircularProgressIndicator());
+    else
+      //TODO:send to image_cropper nad then  make editor interface using flutter_image_editor
+      return Image.file(_imageFile);
   }
 
-  // ignore: unused_field
   File _imageFile;
 
-  // ignore: unused_element
-  Future<void> _showImagePicker() async {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return SimpleDialog(
-          contentPadding: EdgeInsets.zero,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(20.0),
-                bottomRight: Radius.circular(20.0)),
-          ),
-          children: <Widget>[
-            Container(
-              alignment: Alignment.center,
-              height: 35,
-              color: Theme.of(context).primaryColor,
-              child: Text(
-                'Choose Source',
-                style: textStyle.copyWith(
-                  fontSize: 20,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            ListTile(
-              onTap: _getImageFromSource,
-              leading: const Icon(Icons.camera_alt),
-              title: const Text("From Camera"),
-            ),
-            ListTile(
-                onTap: () {
-                  _getImageFromSource(ImageSource.gallery);
-                },
-                leading: const Icon(Icons.image),
-                title: const Text("From Gallery")),
-          ],
-        );
-      },
-    );
+  @override
+  void initState() {
+    super.initState();
+    _getImageFromSource();
   }
 
-  Future<void> _getImageFromSource([ImageSource source]) async {
-    Navigator.pop(context);
-    final _pickedFile =
-        await ImagePicker().getImage(source: source ?? ImageSource.camera);
+  Future<void> _getImageFromSource() async {
+    final PickedFile _pickedFile =
+        await ImagePicker().getImage(source: ImageSource.camera);
     if (_pickedFile != null) {
       setState(() {
         _imageFile = File(_pickedFile.path);
       });
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: getBody,
+    );
   }
 }

@@ -71,6 +71,7 @@ This project is to help you easily scan you documents via camera or the images a
 
 - [Fork](https://github.com/askbuddie/easy-scan/fork) the project
 - Make a `feature-branch` from `dev` and add your features
+- Run  `flutter analyze .` 
 - Send pull request to `dev` and wait to merge.
 
 Check the [installation](#installation) section to start contributing to this project.

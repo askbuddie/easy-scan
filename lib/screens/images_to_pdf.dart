@@ -25,9 +25,7 @@ class _ImageToPdfState extends State<ImageToPdf> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          getImageFromGallery();
-        },
+        onPressed: getImageFromGallery,
         child: const Icon(Icons.add_a_photo),
       ),
       appBar: AppBar(

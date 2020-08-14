@@ -11,7 +11,7 @@ class ImageToPdf extends StatefulWidget {
 class _ImageToPdfState extends State<ImageToPdf> {
   // ignore: prefer_final_fields
   List<File> _images = [];
-  final picker = ImagePicker();
+  final ImagePicker picker = ImagePicker();
   Future getImageFromGallery() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     if (pickedFile != null && pickedFile.path != "") {
@@ -41,18 +41,13 @@ class _ImageToPdfState extends State<ImageToPdf> {
     return GridView.builder(
         gridDelegate:
             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-        itemCount: _images == null ? 0 : _images.length,
+        itemCount: _images.length,
         itemBuilder: (context, index) {
-          if (_images != null) {
-            return Card(
-              child: Image.file(
-                _images[index],
-                fit: BoxFit.cover,
-              ),
-            );
-          }
-          return const Center(
-            child: Text("Select Image"),
+          return Card(
+            child: Image.file(
+              _images[index],
+              fit: BoxFit.cover,
+            ),
           );
         });
   }

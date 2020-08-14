@@ -40,14 +40,12 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           HomeCard(
-            onTap: () {
-              return Navigator.push(
+            onTap: ()=> Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (_) => ImageToPdf(),
                 ),
-              );
-            },
+              ),
             iconData: Icons.picture_as_pdf,
             color: Colors.green,
             text: 'Image to pdf',

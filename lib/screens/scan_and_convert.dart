@@ -12,6 +12,7 @@ class _ScanAndConvertState extends State<ScanAndConvert> {
     if (_imageFile == null)
       return Center(child: CircularProgressIndicator());
     else
+      //TODO:send to image_cropper nad then  make editor interface using flutter_image_editor
       return Image.file(_imageFile);
   }
 
@@ -20,13 +21,12 @@ class _ScanAndConvertState extends State<ScanAndConvert> {
   @override
   void initState() {
     super.initState();
-    _getImageFromSource(ImageSource.gallery);
+    _getImageFromSource();
   }
 
-  Future<void> _getImageFromSource([ImageSource source]) async {
-    Navigator.pop(context);
+  Future<void> _getImageFromSource() async {
     final PickedFile _pickedFile =
-        await ImagePicker().getImage(source: source ?? ImageSource.camera);
+        await ImagePicker().getImage(source: ImageSource.camera);
     if (_pickedFile != null) {
       setState(() {
         _imageFile = File(_pickedFile.path);

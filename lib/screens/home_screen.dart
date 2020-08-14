@@ -1,4 +1,3 @@
-
 import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/screens/image_to_pdf.dart';
 import 'package:EasyScan/screens/scan_and_convert.dart';
@@ -11,9 +10,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // ignore: unused_field
-  
-
   @override
   void initState() {
     super.initState();
@@ -40,12 +36,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           HomeCard(
-            onTap: ()=> Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => ImageToPdf(),
-                ),
-              ),
+            onTap: () => Navigator.push(
+                context, MaterialPageRoute(builder: (_) => ImageToPdf())),
             iconData: Icons.picture_as_pdf,
             color: Colors.green,
             text: 'Image to pdf',

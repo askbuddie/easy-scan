@@ -9,11 +9,11 @@ class ImageToPdf extends StatefulWidget {
 }
 
 class _ImageToPdfState extends State<ImageToPdf> {
-  // ignore: prefer_final_fields
   List<File> _images = [];
-  final ImagePicker picker = ImagePicker();
+  ImagePicker _picker = ImagePicker();
   Future getImageFromGallery() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    final PickedFile pickedFile =
+        await _picker.getImage(source: ImageSource.gallery);
     if (pickedFile != null && pickedFile.path != "") {
       setState(() {
         _images.add(File(pickedFile.path));

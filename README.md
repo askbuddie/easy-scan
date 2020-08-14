@@ -63,6 +63,7 @@ List of all Contributors:
 - [Siddhartha Joshi](https://github.com/cimplesid)
 - [Aayush Bhattarai](https://github.com/coder-Aayush)
 - [Ashish Yadav](https://github.com/ashiishme)
+- [Sailesh Dahal](https://github.com/saileshbro)
 
 ## Contribution
 

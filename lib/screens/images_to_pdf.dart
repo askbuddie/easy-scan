@@ -43,6 +43,7 @@ class _ImageToPdfState extends State<ImageToPdf> {
             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
         itemCount: _images.length,
         itemBuilder: (context, index) {
+          //TODO:handle length zero condition
           return Card(
             child: Image.file(
               _images[index],

@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:EasyScan/Utils/permission_checker.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'constants.dart';
 
@@ -83,18 +85,24 @@ void exportPdf(List<File> images) {
 
 Future<String> savePdf(Document pdf) async {
   //this supports only android currently
-  final Directory appDocDir =
-      Directory("file:///storage/emulated/0/Document/Easy Scan/");
-  final bool hasExisted = await appDocDir.exists();
-  if (!hasExisted) {
-    appDocDir.create();
+  await permision.checkPermission();
+  if (permision.permissionStatus != PermissionStatus.granted) {
+    await permision.requestPermission();
+  } else {
+    final Directory appDocDir =
+        Directory("file:///storage/emulated/0/Document/Easy Scan/");
+    final bool hasExisted = await appDocDir.exists();
+    if (!hasExisted) {
+      appDocDir.create();
+    }
+    final now = DateTime.now().millisecondsSinceEpoch.toString();
+    final File file = File('${appDocDir.path}/${now.substring(9)}.pdf');
+    await file.create(recursive: true);
+    final data = pdf.save();
+    await file.writeAsBytes(data);
+    // ignore: avoid_print
+    print(file.path);
+    return file.path;
   }
-  final now = DateTime.now().millisecondsSinceEpoch.toString();
-  final File file = File('${appDocDir.path}/${now.substring(9)}.pdf');
-  await file.create(recursive: true);
-  final data = pdf.save();
-  await file.writeAsBytes(data);
-  // ignore: avoid_print
-  print(file.path);
-  return file.path;
+  return null;
 }

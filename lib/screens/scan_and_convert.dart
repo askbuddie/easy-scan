@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:EasyScan/Utils/methods.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -28,8 +29,10 @@ class _ScanAndConvertState extends State<ScanAndConvert> {
     final PickedFile _pickedFile =
         await ImagePicker().getImage(source: ImageSource.camera);
     if (_pickedFile != null) {
-      setState(() {
-        _imageFile = File(_pickedFile.path);
+      cropImage(_pickedFile.path, (path) {
+        setState(() {
+          _imageFile = File(path);
+        });
       });
     }
   }

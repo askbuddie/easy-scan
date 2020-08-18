@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:EasyScan/Utils/methods.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -8,12 +9,12 @@ class ScanAndConvert extends StatefulWidget {
 }
 
 class _ScanAndConvertState extends State<ScanAndConvert> {
-  get getBody {
-    if (_imageFile == null)
-      return Center(child: CircularProgressIndicator());
-    else
-      //TODO:send to image_cropper nad then  make editor interface using flutter_image_editor
+  Widget get getBody {
+    if (_imageFile == null) {
+      return const Center(child: CircularProgressIndicator());
+    } else {
       return Image.file(_imageFile);
+    }
   }
 
   File _imageFile;
@@ -28,8 +29,11 @@ class _ScanAndConvertState extends State<ScanAndConvert> {
     final PickedFile _pickedFile =
         await ImagePicker().getImage(source: ImageSource.camera);
     if (_pickedFile != null) {
-      setState(() {
-        _imageFile = File(_pickedFile.path);
+      cropImage(_pickedFile.path, (path) {
+        setState(() {
+          _imageFile = File(path);
+        });
+        //TODO:send to editing page (first make one)
       });
     }
   }
@@ -37,6 +41,9 @@ class _ScanAndConvertState extends State<ScanAndConvert> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Image to convert'),
+      ),
       body: getBody,
     );
   }

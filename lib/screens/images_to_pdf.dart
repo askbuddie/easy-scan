@@ -9,8 +9,8 @@ class ImageToPdf extends StatefulWidget {
 }
 
 class _ImageToPdfState extends State<ImageToPdf> {
-  List<File> _images = [];
-  ImagePicker _picker = ImagePicker();
+ final List<File> _images = [];
+  final ImagePicker _picker = ImagePicker();
   Future getImageFromGallery() async {
     final PickedFile pickedFile =
         await _picker.getImage(source: ImageSource.gallery);

@@ -8,12 +8,12 @@ class ScanAndConvert extends StatefulWidget {
 }
 
 class _ScanAndConvertState extends State<ScanAndConvert> {
-  get getBody {
-    if (_imageFile == null)
-      return Center(child: CircularProgressIndicator());
-    else
-      //TODO:send to image_cropper nad then  make editor interface using flutter_image_editor
+  Widget get getBody {
+    if (_imageFile == null) {
+      return const Center(child: CircularProgressIndicator());
+    } else {
       return Image.file(_imageFile);
+    }
   }
 
   File _imageFile;

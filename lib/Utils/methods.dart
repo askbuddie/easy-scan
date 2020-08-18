@@ -5,7 +5,6 @@ import 'package:flutter/material.dart' as material;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import 'constants.dart';
 
@@ -46,6 +45,7 @@ Future cropImage(String imagepath, Function(String) onCrop) async {
 
 void exportPdf(List<File> images) {
   final Document pdf = Document();
+  //TODO:make better ui
   pdf.addPage(MultiPage(
       pageFormat: PdfPageFormat.a4.copyWith(
         marginBottom: 1 * PdfPageFormat.cm,
@@ -85,12 +85,11 @@ void exportPdf(List<File> images) {
 
 Future<String> savePdf(Document pdf) async {
   //this supports only android currently
-  await permision.checkPermission();
-  if (permision.permissionStatus != PermissionStatus.granted) {
+  final bool permission = await permision.checkPermission();
+  if (!permission) {
     await permision.requestPermission();
   } else {
-    final Directory appDocDir =
-        Directory("file:///storage/emulated/0/Document/Easy Scan/");
+    final Directory appDocDir = Directory(pdfPathAndroid);
     final bool hasExisted = await appDocDir.exists();
     if (!hasExisted) {
       appDocDir.create();
@@ -100,8 +99,6 @@ Future<String> savePdf(Document pdf) async {
     await file.create(recursive: true);
     final data = pdf.save();
     await file.writeAsBytes(data);
-    // ignore: avoid_print
-    print(file.path);
     return file.path;
   }
   return null;

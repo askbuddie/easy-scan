@@ -52,6 +52,11 @@ class _ImageToPdfState extends State<ImageToPdf> {
                 });
               }),
           Expanded(child: _buildImageList(context)),
+          FlatButton(
+              onPressed: () {
+                if (_images.isNotEmpty) exportPdf(_images);
+              },
+              child: const Text('export'))
         ],
       ),
     );

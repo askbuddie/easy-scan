@@ -33,6 +33,7 @@ class _ScanAndConvertState extends State<ScanAndConvert> {
         setState(() {
           _imageFile = File(path);
         });
+        //TODO:send to editing page (first make one)
       });
     }
   }
@@ -40,6 +41,9 @@ class _ScanAndConvertState extends State<ScanAndConvert> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Image to convert'),
+      ),
       body: getBody,
     );
   }

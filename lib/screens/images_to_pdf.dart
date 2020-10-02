@@ -32,33 +32,39 @@ class _ImageToPdfState extends State<ImageToPdf> {
   bool _cropImage = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: getImageFromGallery,
-        icon: const Icon(Icons.add_a_photo),
-        label: const Text('Add image'),
-      ),
-      appBar: AppBar(
-        title: const Text('Choose Image'),
-      ),
-      body: Column(
-        children: [
-          CheckboxListTile(
-              title: const Text('Crop Image'),
-              value: _cropImage,
-              onChanged: (crop) {
-                setState(() {
-                  _cropImage = crop;
-                });
-              }),
-          Expanded(child: _buildImageList(context)),
-          //TODO:make ui better
-          FlatButton(
-              onPressed: () {
-                if (_images.isNotEmpty) exportPdf(_images);
-              },
-              child: const Text('export'))
-        ],
+    return WillPopScope(
+      onWillPop: () async {
+        if (_images.isNotEmpty) return _alertUser(context);
+        return true;
+      },
+      child: Scaffold(
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: getImageFromGallery,
+          icon: const Icon(Icons.add_a_photo),
+          label: const Text('Add image'),
+        ),
+        appBar: AppBar(
+          title: const Text('Choose Image'),
+        ),
+        body: Column(
+          children: [
+            CheckboxListTile(
+                title: const Text('Crop Image'),
+                value: _cropImage,
+                onChanged: (crop) {
+                  setState(() {
+                    _cropImage = crop;
+                  });
+                }),
+            Expanded(child: _buildImageList(context)),
+            //TODO:make ui better
+            FlatButton(
+                onPressed: () {
+                  if (_images.isNotEmpty) exportPdf(_images);
+                },
+                child: const Text('export'))
+          ],
+        ),
       ),
     );
   }
@@ -81,5 +87,25 @@ class _ImageToPdfState extends State<ImageToPdf> {
             ),
           );
         });
+  }
+
+  Future<bool> _alertUser(context) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Warning'),
+        content: const Text('Are you sure want to quite without saving?'),
+        actions: [
+          FlatButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('No'),
+          ),
+          FlatButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Yes'),
+          ),
+        ],
+      ),
+    );
   }
 }

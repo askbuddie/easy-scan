@@ -94,7 +94,7 @@ class _ImageToPdfState extends State<ImageToPdf> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Warning'),
-        content: const Text('Are you sure want to quite without saving?'),
+        content: const Text('Are you sure want to quit without saving?'),
         actions: [
           FlatButton(
             onPressed: () => Navigator.pop(context, false),

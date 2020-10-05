@@ -35,11 +35,17 @@ class _ImageToPdfState extends State<ImageToPdf> {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         onPressed: getImageFromGallery,
-        icon: const Icon(Icons.add_a_photo),
-        label: const Text('Add image'),
+        icon: const Icon(Icons.picture_as_pdf_rounded),
+        label: const Text('Convert'),
       ),
       appBar: AppBar(
         title: const Text('Choose Image'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: getImageFromGallery,
+          )
+        ],
       ),
       body: Column(
         children: [
@@ -68,10 +74,17 @@ class _ImageToPdfState extends State<ImageToPdf> {
             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
         itemCount: _images.length,
         itemBuilder: (context, index) {
-          return Card(
-            child: Image.file(
-              _images[index],
-              fit: BoxFit.cover,
+          return GestureDetector(
+            onLongPress: () {
+              _images.removeAt(index);
+              setState(() {});
+            },
+            child: Card(
+              elevation: 5,
+              child: Image.file(
+                _images[index],
+                fit: BoxFit.cover,
+              ),
             ),
           );
         });

@@ -1,9 +1,7 @@
 import 'dart:io';
-
+import 'package:EasyScan/Utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
-
-import 'constants.dart';
 
 Future cropImage(String imagepath, Function(String) onCrop) async {
   final File croppedFile = await ImageCropper.cropImage(

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:EasyScan/Utils/methods.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -32,39 +31,50 @@ class _ImageToPdfState extends State<ImageToPdf> {
   bool _cropImage = false;
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        if (_images.isNotEmpty) return _alertUser(context);
-        return true;
-      },
-      child: Scaffold(
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: getImageFromGallery,
-          icon: const Icon(Icons.add_a_photo),
-          label: const Text('Add image'),
-        ),
-        appBar: AppBar(
-          title: const Text('Choose Image'),
-        ),
-        body: Column(
-          children: [
-            CheckboxListTile(
-                title: const Text('Crop Image'),
-                value: _cropImage,
-                onChanged: (crop) {
-                  setState(() {
-                    _cropImage = crop;
+    return Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          (_images.isNotEmpty)
+              ? exportPdf(_images)
+              : showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return SimpleDialog(
+                      title: const Text("Please select some images first."),
+                      children: [
+                        SimpleDialogOption(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text("OK"),
+                        )
+                      ],
+                    );
                   });
-                }),
-            Expanded(child: _buildImageList(context)),
-            //TODO:make ui better
-            FlatButton(
-                onPressed: () {
-                  if (_images.isNotEmpty) exportPdf(_images);
-                },
-                child: const Text('export'))
-          ],
-        ),
+        },
+        icon: const Icon(Icons.upload_file),
+        label: const Text('Export'),
+      ),
+      appBar: AppBar(
+        title: const Text('Choose Image'),
+        actions: [
+          IconButton(
+              icon: const Icon(Icons.add), onPressed: getImageFromGallery)
+        ],
+      ),
+      body: Column(
+        children: [
+          CheckboxListTile(
+              title: const Text('Crop Image'),
+              value: _cropImage,
+              onChanged: (crop) {
+                setState(() {
+                  _cropImage = crop;
+                });
+              }),
+          Expanded(child: _buildImageList(context)),
+          //TODO:make ui better
+        ],
       ),
     );
   }
@@ -80,32 +90,31 @@ class _ImageToPdfState extends State<ImageToPdf> {
             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
         itemCount: _images.length,
         itemBuilder: (context, index) {
-          return Card(
-            child: Image.file(
-              _images[index],
-              fit: BoxFit.cover,
-            ),
+          return GestureDetector(
+            onLongPress: () {},
+            child: Stack(fit: StackFit.expand, children: [
+              Card(
+                child: Image.file(
+                  _images[index],
+                  fit: BoxFit.fill,
+                ),
+              ),
+              Positioned(
+                right: 0,
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.close,
+                    size: 25,
+                    color: Colors.red,
+                  ),
+                  onPressed: () {
+                    _images.removeAt(index);
+                    setState(() {});
+                  },
+                ),
+              )
+            ]),
           );
         });
-  }
-
-  Future<bool> _alertUser(context) {
-    return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Warning'),
-        content: const Text('Are you sure want to quit without saving?'),
-        actions: [
-          FlatButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('No'),
-          ),
-          FlatButton(
-            onPressed: () => Navigator.pop(context, true),
-            child: const Text('Yes'),
-          ),
-        ],
-      ),
-    );
   }
 }

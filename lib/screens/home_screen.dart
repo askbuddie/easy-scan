@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
-        title: const Text("Esay Scan"),
+        title: const Text("Easy Scan"),
         centerTitle: true,
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [

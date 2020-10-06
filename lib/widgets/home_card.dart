@@ -3,43 +3,38 @@ import 'package:flutter/material.dart';
 class HomeCard extends StatelessWidget {
   final Color color;
   final String text;
-  final TextStyle textStyle;
   final IconData iconData;
   final Function onTap;
   const HomeCard(
-      {Key key,
-      @required this.text,
-      this.color,
-      this.textStyle,
-      this.iconData,
-      this.onTap})
+      {Key key, @required this.text, this.color, this.iconData, this.onTap})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.all(20),
+        margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: color ?? Colors.red.withOpacity(0.6),
-        ),
+            borderRadius: BorderRadius.circular(20), color: Colors.grey[200]),
         alignment: Alignment.center,
-        height: 100,
-        width: 200,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        height: MediaQuery.of(context).size.height / 6,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            if (iconData != null)
-              Icon(
-                iconData,
-                color: Colors.white,
-                size: 45,
+            Icon(
+              iconData,
+              color: color,
+              size: 50,
+            ),
+            Expanded(
+              child: Text(
+                text,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 25,
+                ),
               ),
-            Text(
-              text,
-              textAlign: TextAlign.center,
-              style: textStyle,
             ),
           ],
         ),

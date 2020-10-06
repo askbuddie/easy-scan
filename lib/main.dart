@@ -1,6 +1,6 @@
 import 'package:EasyScan/screens/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'Utils/constants.dart';
+import 'package:EasyScan/Utils/constants.dart';
 
 void main() {
   runApp(MyApp());

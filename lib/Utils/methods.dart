@@ -5,7 +5,6 @@ import 'package:flutter/material.dart' as material;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
-
 import 'package:EasyScan/Utils/constants.dart';
 
 Future cropImage(String imagepath, Function(String) onCrop) async {

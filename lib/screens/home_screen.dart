@@ -1,11 +1,8 @@
 import 'package:EasyScan/Utils/constants.dart';
-import 'package:EasyScan/Utils/permission_checker.dart';
 import 'package:EasyScan/screens/images_to_pdf.dart';
-import 'package:EasyScan/screens/saved_pdf.dart';
 import 'package:EasyScan/screens/scan_and_convert.dart';
 import 'package:EasyScan/widgets/home_card.dart';
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -14,56 +11,54 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  void initState() {
-    super.initState();
-    checkPermission();
-  }
-
-  Future<void> checkPermission() async {
-    await permision.checkPermission();
-    if (permision.permissionStatus != PermissionStatus.granted) {
-      await permision.requestPermission();
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('EasyScan'),
+        backgroundColor: primaryColor,
+        title: const Text("Easy Scan"),
+        centerTitle: true,
       ),
-      body: GridView.count(
-        crossAxisCount: 2,
-        crossAxisSpacing: 5,
-        children: [
-          HomeCard(
-            onTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (_) => ScanAndConvert())),
-            iconData: Icons.broken_image,
-            color: Colors.red,
-            text: 'Scan and convert',
-            textStyle: textStyle.copyWith(
-              fontSize: 20,
-            ),
-          ),
-          HomeCard(
-            onTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (_) => ImageToPdf())),
-            iconData: Icons.picture_as_pdf,
-            color: Colors.green,
-            text: 'Image to pdf',
-            textStyle: textStyle.copyWith(fontSize: 20),
-          ),
-          HomeCard(
-            onTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (_) => SavedPdfScreen())),
-            iconData: Icons.picture_as_pdf,
-            color: Colors.blue,
-            text: 'Saved pdf',
-            textStyle: textStyle.copyWith(fontSize: 20),
-          ),
-        ],
-      ),
+      body: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        HomeCard(
+          onTap: () => Navigator.push(
+              context, MaterialPageRoute(builder: (_) => ScanAndConvert())),
+          iconData: Icons.image_search,
+          color: Colors.red,
+          text: 'Scan and convert',
+        ),
+        HomeCard(
+          onTap: () => Navigator.push(
+              context, MaterialPageRoute(builder: (_) => ImageToPdf())),
+          iconData: Icons.picture_as_pdf_outlined,
+          color: Colors.green,
+          text: 'Scan and convert',
+        ),
+        // This widget is needed to be implemented for recent projects
+        // Expanded(
+        //     child: Container(
+        //         padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+        //         margin: const EdgeInsets.only(top: 20),
+        //         decoration: BoxDecoration(
+        //             color: Colors.grey.shade300,
+        //             borderRadius: const BorderRadius.only(
+        //                 topLeft: Radius.circular(50),
+        //                 topRight: Radius.circular(50))),
+        //         child: GridView.builder(
+        //             gridDelegate:
+        //                 const SliverGridDelegateWithFixedCrossAxisCount(
+        //                     crossAxisCount: 2,
+        //                     mainAxisSpacing: 1,
+        //                     crossAxisSpacing: 1),
+        //             itemBuilder: (context, index) {
+        //               return Container(
+        //                   margin: const EdgeInsets.symmetric(horizontal: 10),
+        //                   child: Center(
+        //                     child: Text(
+        //                       index.toString(),
+        //                     ),
+        //                   ));
+        //             })))
+      ]),
     );
   }
 }

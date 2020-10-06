@@ -40,7 +40,7 @@ class _ImageToPdfState extends State<ImageToPdf> {
                   context: context,
                   builder: (BuildContext context) {
                     return SimpleDialog(
-                      title: const Text("please select some Image first"),
+                      title: const Text("Please select some Images first."),
                       children: [
                         SimpleDialogOption(
                           onPressed: () {

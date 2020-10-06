@@ -11,7 +11,7 @@ class ScanAndConvert extends StatefulWidget {
 class _ScanAndConvertState extends State<ScanAndConvert> {
   Widget get getBody {
     if (_imageFile == null) {
-      return const Center(child: CircularProgressIndicator());
+      return const Center(child: Text('No Image Available'));
     } else {
       return Image.file(_imageFile);
     }

@@ -2,6 +2,7 @@ import 'dart:io' as dd;
 import 'package:flutter/material.dart';
 import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/Utils/permission_checker.dart';
+import 'package:open_file/open_file.dart';
 
 class SavedPdfScreen extends StatefulWidget {
   @override
@@ -62,9 +63,7 @@ class _SavedPdfScreenState extends State<SavedPdfScreen> {
         itemBuilder: (_, i) {
           //TODO:make better card
           return GestureDetector(
-            onTap: () {
-              //TODO:implement open
-            },
+            onTap: () => OpenFile.open(_fileSystemEntitys[i].path),
             child: Container(
                 color: primaryColor.withOpacity(0.2),
                 margin: const EdgeInsets.all(10),

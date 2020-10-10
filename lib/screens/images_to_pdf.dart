@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:EasyScan/Utils/methods.dart';
 import 'package:flutter/material.dart';
+import 'package:EasyScan/Utils/methods.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImageToPdf extends StatefulWidget {
@@ -32,35 +32,30 @@ class _ImageToPdfState extends State<ImageToPdf> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          (_images.isNotEmpty)
-              ? exportPdf(_images)
-              : showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return SimpleDialog(
-                      title: const Text("Please select some images first."),
-                      children: [
-                        SimpleDialogOption(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text("OK"),
-                        )
-                      ],
-                    );
-                  });
-        },
-        icon: const Icon(Icons.upload_file),
-        label: const Text('Export'),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          if (_images.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: FloatingActionButton.extended(
+                heroTag: 'export',
+                onPressed: () => exportPdf(_images),
+                icon: const Icon(Icons.upload_file),
+                label: const Text('Export'),
+                backgroundColor: Colors.green,
+              ),
+            ),
+          FloatingActionButton.extended(
+            heroTag: 'addimg',
+            onPressed: getImageFromGallery,
+            icon: const Icon(Icons.add),
+            label: const Text('Add image'),
+          ),
+        ],
       ),
       appBar: AppBar(
-        title: const Text('Choose Image'),
-        actions: [
-          IconButton(
-              icon: const Icon(Icons.add), onPressed: getImageFromGallery)
-        ],
+        title: const Text('Images to Pdf'),
       ),
       body: Column(
         children: [

@@ -15,23 +15,28 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
-        title: const Text("Easy Scan"),
+        title: const Text(
+          "Easy Scan",
+          style: TextStyle(
+              fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+        ),
         centerTitle: true,
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        SizedBox(
+          height: MediaQuery.of(context).size.longestSide * 0.2,
+        ),
         HomeCard(
           onTap: () => Navigator.push(
               context, MaterialPageRoute(builder: (_) => ScanAndConvert())),
           iconData: Icons.image_search,
-          color: Colors.red,
-          text: 'Scan and convert',
+          text: 'Scan and Convert',
         ),
         HomeCard(
           onTap: () => Navigator.push(
               context, MaterialPageRoute(builder: (_) => ImageToPdf())),
           iconData: Icons.picture_as_pdf_outlined,
-          color: Colors.green,
-          text: 'Scan and convert',
+          text: 'Pick and Export',
         ),
         // This widget is needed to be implemented for recent projects
         // Expanded(

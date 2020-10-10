@@ -1,8 +1,8 @@
-import 'package:EasyScan/Utils/constants.dart';
+import 'package:flutter/material.dart';
+import 'package:EasyScan/widgets/home_card.dart';
 import 'package:EasyScan/screens/images_to_pdf.dart';
 import 'package:EasyScan/screens/scan_and_convert.dart';
-import 'package:EasyScan/widgets/home_card.dart';
-import 'package:flutter/material.dart';
+
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -14,7 +14,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: primaryColor,
         title: const Text("Easy Scan"),
         centerTitle: true,
       ),

@@ -12,6 +12,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'EasyScan',
       theme: ThemeData(
+        buttonTheme: ButtonThemeData(
+          buttonColor: primaryColor,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+        ),
         primaryColor: primaryColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),

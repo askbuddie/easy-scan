@@ -1,7 +1,10 @@
 import 'dart:io';
+
 import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/Utils/methods.dart';
+
 import 'package:flutter/material.dart';
+import 'package:EasyScan/Utils/methods.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImageToPdf extends StatefulWidget {
@@ -33,6 +36,7 @@ class _ImageToPdfState extends State<ImageToPdf> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         floatingActionButton: Padding(
           padding: const EdgeInsets.all(16.0),
           child: FloatingActionButton.extended(
@@ -98,6 +102,7 @@ class _ImageToPdfState extends State<ImageToPdf> {
             ],
           ),
         ));
+
   }
 
   Widget _buildImageList(BuildContext context) {

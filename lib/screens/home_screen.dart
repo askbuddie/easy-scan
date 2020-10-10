@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
               context, MaterialPageRoute(builder: (_) => ImageToPdf())),
           iconData: Icons.picture_as_pdf_outlined,
           color: Colors.green,
-          text: 'Scan and convert',
+          text: 'Images to Pdf',
         ),
         // This widget is needed to be implemented for recent projects
         // Expanded(

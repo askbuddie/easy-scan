@@ -10,9 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'EasyScan',
       theme: ThemeData(
-        primaryColor: primaryColor,
+        primaryColor: secondaryColor,
+        backgroundColor: Colors.white38,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomeScreen(),

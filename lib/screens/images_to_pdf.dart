@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/Utils/methods.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -32,49 +33,68 @@ class _ImageToPdfState extends State<ImageToPdf> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          (_images.isNotEmpty)
-              ? exportPdf(_images)
-              : showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return SimpleDialog(
-                      title: const Text("Please select some images first."),
-                      children: [
-                        SimpleDialogOption(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text("OK"),
-                        )
-                      ],
-                    );
-                  });
-        },
-        icon: const Icon(Icons.upload_file),
-        label: const Text('Export'),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: FloatingActionButton.extended(
+          onPressed: () {
+            (_images.isNotEmpty)
+                ? exportPdf(_images)
+                : showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return SimpleDialog(
+                        title: const Text("Please select some images first."),
+                        children: [
+                          SimpleDialogOption(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("OK"),
+                          )
+                        ],
+                      );
+                    });
+          },
+          backgroundColor: secondaryColor,
+          splashColor: lunchColor,
+          elevation: 8.0,
+          icon: const Icon(Icons.upload_file),
+          label: const Text(
+            'Export',
+            style: TextStyle(
+                color: Colors.white, fontSize: 12, fontWeight: FontWeight.w700),
+          ),
+        ),
       ),
       appBar: AppBar(
-        title: const Text('Choose Image'),
+        title: const Text(
+          'Choose Image',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
         actions: [
           IconButton(
               icon: const Icon(Icons.add), onPressed: getImageFromGallery)
         ],
       ),
-      body: Column(
-        children: [
-          CheckboxListTile(
-              title: const Text('Crop Image'),
-              value: _cropImage,
-              onChanged: (crop) {
-                setState(() {
-                  _cropImage = crop;
-                });
-              }),
-          Expanded(child: _buildImageList(context)),
-          //TODO:make ui better
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            CheckboxListTile(
+                checkColor: secondaryColor,
+                title: const Text('Crop Image',
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                value: _cropImage,
+                onChanged: (crop) {
+                  setState(() {
+                    _cropImage = crop;
+                  });
+                }),
+            Expanded(child: _buildImageList(context)),
+            //TODO:make ui better
+          ],
+        ),
       ),
     );
   }

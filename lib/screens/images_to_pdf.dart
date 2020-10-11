@@ -36,50 +36,33 @@ class _ImageToPdfState extends State<ImageToPdf> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: FloatingActionButton.extended(
-            onPressed: () {
-              (_images.isNotEmpty)
-                  ? exportPdf(_images)
-                  : showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return SimpleDialog(
-                          title: const Text("Please select some images first."),
-                          children: [
-                            SimpleDialogOption(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text("OK"),
-                            )
-                          ],
-                        );
-                      });
-            },
-            backgroundColor: primaryColor,
-            splashColor: secondaryColor,
-            elevation: 8.0,
-            icon: const Icon(Icons.upload_file),
-            label: const Text(
-              'Export',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700),
+        floatingActionButton: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            if (_images.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: FloatingActionButton.extended(
+                  heroTag: 'export',
+                  onPressed: () => exportPdf(_images),
+                  icon: const Icon(Icons.upload_file),
+                  label: const Text('Export'),
+                  backgroundColor: Colors.green,
+                ),
+              ),
+            FloatingActionButton.extended(
+              heroTag: 'addimg',
+              onPressed: getImageFromGallery,
+              icon: const Icon(Icons.add),
+              label: const Text('Add image'),
             ),
-          ),
+          ],
         ),
         appBar: AppBar(
           title: const Text(
             'Choose Image',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          actions: [
-            IconButton(
-                icon: const Icon(Icons.add), onPressed: getImageFromGallery)
-          ],
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),

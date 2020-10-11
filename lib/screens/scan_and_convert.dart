@@ -4,7 +4,7 @@ import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/Utils/methods.dart';
 
 import 'package:flutter/material.dart';
-import 'package:EasyScan/Utils/methods.dart';
+
 import 'package:image_picker/image_picker.dart';
 
 class ScanAndConvert extends StatefulWidget {

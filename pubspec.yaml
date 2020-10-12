@@ -14,7 +14,7 @@ dependencies:
   google_fonts: ^1.1.0
   image_cropper: ^1.3.0
   image_picker: ^0.6.7+4
-  open_file: ^3.0.1
+  open_file:
   pdf: ^1.10.0
   permission_handler: ^5.0.1+1
 

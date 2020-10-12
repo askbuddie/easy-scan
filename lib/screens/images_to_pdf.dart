@@ -1,6 +1,10 @@
 import 'dart:io';
-import 'package:flutter/material.dart';
+
+import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/Utils/methods.dart';
+
+import 'package:flutter/material.dart';
+
 import 'package:image_picker/image_picker.dart';
 
 class ImageToPdf extends StatefulWidget {
@@ -32,46 +36,54 @@ class _ImageToPdfState extends State<ImageToPdf> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          if (_images.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: FloatingActionButton.extended(
-                heroTag: 'export',
-                onPressed: () => exportPdf(_images),
-                icon: const Icon(Icons.upload_file),
-                label: const Text('Export'),
-                backgroundColor: Colors.green,
+        floatingActionButton: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            if (_images.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: FloatingActionButton.extended(
+                  heroTag: 'export',
+                  onPressed: () => exportPdf(_images),
+                  icon: const Icon(Icons.upload_file),
+                  label: const Text('Export'),
+                  backgroundColor: Colors.green,
+                ),
               ),
+            FloatingActionButton.extended(
+              heroTag: 'addimg',
+              onPressed: getImageFromGallery,
+              icon: const Icon(Icons.add),
+              label: const Text('Add image'),
             ),
-          FloatingActionButton.extended(
-            heroTag: 'addimg',
-            onPressed: getImageFromGallery,
-            icon: const Icon(Icons.add),
-            label: const Text('Add image'),
+          ],
+        ),
+        appBar: AppBar(
+          title: const Text(
+            'Choose Image',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-        ],
-      ),
-      appBar: AppBar(
-        title: const Text('Images to Pdf'),
-      ),
-      body: Column(
-        children: [
-          CheckboxListTile(
-              title: const Text('Crop Image'),
-              value: _cropImage,
-              onChanged: (crop) {
-                setState(() {
-                  _cropImage = crop;
-                });
-              }),
-          Expanded(child: _buildImageList(context)),
-          //TODO:make ui better
-        ],
-      ),
-    );
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              CheckboxListTile(
+                  checkColor: secondaryColor,
+                  title: const Text('Crop Image',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                  value: _cropImage,
+                  onChanged: (crop) {
+                    setState(() {
+                      _cropImage = crop;
+                    });
+                  }),
+              Expanded(child: _buildImageList(context)),
+              //TODO:make ui better
+            ],
+          ),
+        ));
   }
 
   Widget _buildImageList(BuildContext context) {

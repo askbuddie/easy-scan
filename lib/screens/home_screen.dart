@@ -14,35 +14,36 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Easy Scan"),
+        title: const Text(
+          "Easy Scan",
+          style: TextStyle(
+              fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+        ),
         centerTitle: true,
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          HomeCard(
-            onTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (_) => ScanAndConvert())),
-            iconData: Icons.image_search,
-            color: Colors.red,
-            text: 'Scan and convert',
-          ),
-          HomeCard(
-            onTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (_) => ImageToPdf())),
-            iconData: Icons.picture_as_pdf_outlined,
-            color: Colors.green,
-            text: 'Images to Pdf',
-          ),
-          HomeCard(
-            onTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (_) => SavedPdfScreen())),
-            iconData: Icons.save_rounded,
-            color: Colors.amber,
-            text: 'History',
-          ),
-        ],
-      ),
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            HomeCard(
+              onTap: () => Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => ScanAndConvert())),
+              iconData: Icons.image_search,
+              text: 'Scan and convert',
+            ),
+            HomeCard(
+              onTap: () => Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => ImageToPdf())),
+              iconData: Icons.picture_as_pdf_outlined,
+              text: 'Images to Pdf',
+            ),
+            HomeCard(
+              onTap: () => Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => SavedPdfScreen())),
+              iconData: Icons.save_rounded,
+              text: 'History',
+            ),
+          ]),
     );
   }
 }

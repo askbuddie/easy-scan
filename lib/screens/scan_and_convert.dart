@@ -1,6 +1,10 @@
 import 'dart:io';
-import 'package:flutter/material.dart';
+
+import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/Utils/methods.dart';
+
+import 'package:flutter/material.dart';
+
 import 'package:image_picker/image_picker.dart';
 
 class ScanAndConvert extends StatefulWidget {
@@ -21,7 +25,10 @@ class _ScanAndConvertState extends State<ScanAndConvert> {
       );
     }
     if (_imageFile == null) {
-      return const Center(child: CircularProgressIndicator());
+      return const Center(
+          child: CircularProgressIndicator(
+        valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
+      ));
     } else {
       return Image.file(_imageFile);
     }
@@ -53,7 +60,11 @@ class _ScanAndConvertState extends State<ScanAndConvert> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Image to convert'),
+        backgroundColor: primaryColor,
+        title: const Text(
+          'Image to convert',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: getBody,
     );

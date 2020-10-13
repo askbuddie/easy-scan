@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'EasyScan',
+      defaultTransition: Transition.rightToLeft,
       theme: ThemeData(
         appBarTheme: const AppBarTheme(color: primaryColor),
         buttonTheme: ButtonThemeData(

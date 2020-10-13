@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:EasyScan/widgets/home_card.dart';
 import 'package:EasyScan/screens/images_to_pdf.dart';
 import 'package:EasyScan/screens/scan_and_convert.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -26,20 +27,17 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             HomeCard(
-              onTap: () => Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => ScanAndConvert())),
+              onTap: () => Get.to(ScanAndConvert()),
               iconData: Icons.image_search,
               text: 'Scan and convert',
             ),
             HomeCard(
-              onTap: () => Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => ImageToPdf())),
+              onTap: () => Get.to(ImageToPdf()),
               iconData: Icons.picture_as_pdf_outlined,
               text: 'Images to Pdf',
             ),
             HomeCard(
-              onTap: () => Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => SavedPdfScreen())),
+              onTap: () => Get.to(SavedPdfScreen()),
               iconData: Icons.save_rounded,
               text: 'History',
             ),

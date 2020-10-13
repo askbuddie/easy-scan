@@ -17,6 +17,7 @@ dependencies:
   open_file:
   pdf: ^1.10.0
   permission_handler: ^5.0.1+1
+  flutter_mobile_vision: ^0.1.4+1
 
 dev_dependencies:
   lint: ^1.2.0

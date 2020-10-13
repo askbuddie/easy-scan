@@ -1,5 +1,6 @@
 import 'package:EasyScan/Utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeCard extends StatelessWidget {
   final String text;
@@ -15,11 +16,11 @@ class HomeCard extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20), color: primaryColor),
           alignment: Alignment.center,
-          height: MediaQuery.of(context).size.height / 6,
+          height: Get.height / 6,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

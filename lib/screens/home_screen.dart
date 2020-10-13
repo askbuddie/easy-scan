@@ -1,4 +1,5 @@
 import 'package:EasyScan/screens/saved_pdf.dart';
+import 'package:EasyScan/screens/ocr.dart';
 import 'package:flutter/material.dart';
 import 'package:EasyScan/widgets/home_card.dart';
 import 'package:EasyScan/screens/images_to_pdf.dart';
@@ -23,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             HomeCard(
               onTap: () => Navigator.push(
@@ -36,6 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   context, MaterialPageRoute(builder: (_) => ImageToPdf())),
               iconData: Icons.picture_as_pdf_outlined,
               text: 'Images to Pdf',
+            ),
+            HomeCard(
+              onTap: () => Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => OCR())),
+              iconData: Icons.picture_as_pdf_outlined,
+              text: 'Text Recognition ',
             ),
             HomeCard(
               onTap: () => Navigator.push(

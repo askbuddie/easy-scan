@@ -1,16 +1,22 @@
 import 'dart:io' as dd;
-import 'package:get/get.dart';
 
 import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/Utils/permission_checker.dart';
+import 'package:get/get.dart';
 
 class SavedPdfController extends GetxController {
   final _isFilesChecked = false.obs;
   final fileSystemEntitys = <dd.FileSystemEntity>[].obs;
   dd.Directory _savedDir;
 
+  bool get isFilesChecked => _isFilesChecked.value;
+
   @override
   void onInit() {
+    _getPaths();
+  }
+
+  void refreshFiles() {
     _getPaths();
   }
 
@@ -28,11 +34,5 @@ class SavedPdfController extends GetxController {
       final _exist = await _savedDir.exists();
       if (_exist) await _getFileList();
     }
-  }
-
-  bool get isFilesChecked => _isFilesChecked.value;
-
-  void refreshFiles() {
-    _getPaths();
   }
 }

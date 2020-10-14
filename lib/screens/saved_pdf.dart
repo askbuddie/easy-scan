@@ -1,12 +1,11 @@
+import 'package:EasyScan/Utils/constants.dart';
+import 'package:EasyScan/controllers/saved_pdf.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:open_file/open_file.dart';
 
-import 'package:EasyScan/Utils/constants.dart';
-import 'package:EasyScan/controllers/saved_pdf.dart';
-
 class SavedPdfScreen extends StatelessWidget {
-  final savedPdfController = Get.find<SavedPdfController>();
+  final _savedPdfController = Get.find<SavedPdfController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,10 +17,10 @@ class SavedPdfScreen extends StatelessWidget {
   }
 
   Widget get getBody {
-    final fileSystemEntitys = savedPdfController.fileSystemEntitys;
-    if (!savedPdfController.isFilesChecked) {
+    final _fileSystemEntitys = _savedPdfController.fileSystemEntitys;
+    if (!_savedPdfController.isFilesChecked) {
       return const Center(child: CircularProgressIndicator());
-    } else if (fileSystemEntitys.isEmpty) {
+    } else if (_fileSystemEntitys.isEmpty) {
       return const Center(
         child: Text(
           'No history found',
@@ -35,7 +34,7 @@ class SavedPdfScreen extends StatelessWidget {
         itemBuilder: (_, i) {
           //TODO:make better card
           return GestureDetector(
-            onTap: () => OpenFile.open(fileSystemEntitys[i].path),
+            onTap: () => OpenFile.open(_fileSystemEntitys[i].path),
             child: Container(
                 color: primaryColor.withOpacity(0.2),
                 margin: const EdgeInsets.all(10),
@@ -44,7 +43,7 @@ class SavedPdfScreen extends StatelessWidget {
                 child: Center(child: Text("Pdf #${i + 1}"))),
           );
         },
-        itemCount: fileSystemEntitys.length,
+        itemCount: _fileSystemEntitys.length,
       );
     }
   }

@@ -1,24 +1,23 @@
+import 'package:EasyScan/Utils/constants.dart';
+import 'package:EasyScan/controllers/images_to_pdf.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:EasyScan/Utils/constants.dart';
-import 'package:EasyScan/controllers/images_to_pdf.dart';
-
 class ImageToPdf extends StatelessWidget {
-  final imageToPdfController = Get.put(ImageToPdfController());
+  final _imageToPdfController = Get.put(ImageToPdfController());
   @override
   Widget build(BuildContext context) {
-    final images = imageToPdfController.images;
+    final _images = _imageToPdfController.images;
     return Scaffold(
         floatingActionButton: Obx(() => Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                if (images.isNotEmpty)
+                if (_images.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: FloatingActionButton.extended(
                       heroTag: 'export',
-                      onPressed: imageToPdfController.exportToPdf,
+                      onPressed: _imageToPdfController.exportToPdf,
                       icon: const Icon(Icons.upload_file),
                       label: const Text('Export'),
                       backgroundColor: Colors.green,
@@ -26,7 +25,7 @@ class ImageToPdf extends StatelessWidget {
                   ),
                 FloatingActionButton.extended(
                   heroTag: 'addimg',
-                  onPressed: imageToPdfController.getImageFromGallery,
+                  onPressed: _imageToPdfController.getImageFromGallery,
                   icon: const Icon(Icons.add),
                   label: const Text('Add image'),
                 ),
@@ -47,11 +46,11 @@ class ImageToPdf extends StatelessWidget {
                   title: const Text('Crop Image',
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
-                  value: imageToPdfController.shouldCropImage.value,
+                  value: _imageToPdfController.shouldCropImage.value,
                   onChanged: (crop) {
-                    imageToPdfController.shouldCropImage.value = crop;
+                    _imageToPdfController.shouldCropImage.value = crop;
                   })),
-              Obx(() => Expanded(child: _buildImageList(images))),
+              Obx(() => Expanded(child: _buildImageList(_images))),
               //TODO:make ui better
             ],
           ),
@@ -87,7 +86,7 @@ class ImageToPdf extends StatelessWidget {
                     color: Colors.red,
                   ),
                   onPressed: () {
-                    imageToPdfController.removeImage(index);
+                    _imageToPdfController.removeImage(index);
                   },
                 ),
               )

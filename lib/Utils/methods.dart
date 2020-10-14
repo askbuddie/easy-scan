@@ -45,7 +45,7 @@ Future cropImage(String imagepath, Function(String) onCrop) async {
 
 void exportPdf(List<File> images) {
   final Document pdf = Document();
-  final fileToImage = images
+  final filesToImages = images
       .map((image) => Image(
           PdfImage.file(
             pdf.document,
@@ -79,7 +79,7 @@ void exportPdf(List<File> images) {
           ),
         );
       },
-      build: (Context context) => <Widget>[...fileToImage]));
+      build: (Context context) => <Widget>[...filesToImages]));
   savePdf(pdf);
 }
 

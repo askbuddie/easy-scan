@@ -44,35 +44,19 @@ class SavedPdfScreen extends StatelessWidget {
                         onPressed: () {
                           _savedPdfController.share(i);
                         },
-                        child: Row(
-                          children: const [
-                            Icon(
-                              Icons.share,
-                              color: primaryColor,
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text("Share")
-                          ],
-                        ),
+                        child: optionRow(
+                            title: "Share",
+                            iconData: Icons.share_outlined,
+                            color: primaryColor),
                       ),
                       SimpleDialogOption(
                         onPressed: () {
                           _savedPdfController.deleteFile(i);
                         },
-                        child: Row(
-                          children: const [
-                            Icon(
-                              Icons.delete_outline,
-                              color: Colors.red,
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text("Delete")
-                          ],
-                        ),
+                        child: optionRow(
+                            title: "Delete",
+                            color: Colors.red,
+                            iconData: Icons.delete_outline_outlined),
                       )
                     ],
                   ));
@@ -88,5 +72,20 @@ class SavedPdfScreen extends StatelessWidget {
         itemCount: _fileSystemEntitys.length,
       );
     }
+  }
+
+  Row optionRow({IconData iconData, String title, Color color}) {
+    return Row(
+      children: [
+        Icon(
+          iconData,
+          color: color,
+        ),
+        const SizedBox(
+          width: 20,
+        ),
+        Text(title)
+      ],
+    );
   }
 }

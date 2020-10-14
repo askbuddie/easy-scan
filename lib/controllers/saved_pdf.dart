@@ -37,13 +37,13 @@ class SavedPdfController extends GetxController {
   }
 
   Future<void> deleteFile(int index) async {
-    final String filename = fileSystemEntitys[index]
-        .toString()
-        .split('/')[4]
-        .toString()
-        .split("'")[0];
+    // final String filename = fileSystemEntitys[index]
+    //     .toString()
+    //     .split('/')[4]
+    //     .toString()
+    //     .split("'")[0];
     try {
-      final file = dd.File('storage/emulated/0/Easy Scan/$filename');
+      final file = dd.File(fileSystemEntitys[index].path);
       if (await file.exists()) {
         await file.delete(recursive: true);
       }
@@ -53,11 +53,6 @@ class SavedPdfController extends GetxController {
   }
 
   void share(int index) {
-    final String filename = fileSystemEntitys[index]
-        .toString()
-        .split('/')[4]
-        .toString()
-        .split("'")[0];
-    Share.shareFiles(['storage/emulated/0/Easy Scan/$filename'], text: 'mypdf');
+    Share.shareFiles([fileSystemEntitys[index].path], text: 'mypdf');
   }
 }

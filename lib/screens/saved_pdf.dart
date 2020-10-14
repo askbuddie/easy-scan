@@ -22,7 +22,7 @@ class _SavedPdfScreenState extends State<SavedPdfScreen> {
     try {
       final file = dd.File('storage/emulated/0/Easy Scan/$filename');
       if (await file.exists()) {
-        await file.delete(recursive: true);
+        await file.delete(recursive: false);
       }
     } catch (e) {
       // error in getting access to the file

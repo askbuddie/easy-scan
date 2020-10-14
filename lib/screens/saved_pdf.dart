@@ -1,41 +1,11 @@
-import 'dart:io' as dd;
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:EasyScan/Utils/constants.dart';
-import 'package:EasyScan/Utils/permission_checker.dart';
 import 'package:open_file/open_file.dart';
+import 'package:EasyScan/Utils/constants.dart';
+import 'package:EasyScan/controllers/saved_pdf.dart';
 
-class SavedPdfScreen extends StatefulWidget {
-  @override
-  _SavedPdfScreenState createState() => _SavedPdfScreenState();
-}
-
-class _SavedPdfScreenState extends State<SavedPdfScreen> {
-  List<dd.FileSystemEntity> _fileSystemEntitys = [];
-  dd.Directory _savedDir;
-//currrently supports only android
-  Future<void> _getPaths() async {
-    final _per = await permision.checkPermission();
-    if (_per) {
-      _savedDir = dd.Directory(pdfPathAndroid);
-      setState(() {});
-      final _exist = await _savedDir.exists();
-      if (_exist) await _getFileList();
-    }
-  }
-
-  Future<void> _getFileList() async {
-    if (_savedDir != null) {
-      _fileSystemEntitys = _savedDir.listSync();
-      setState(() {});
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _getPaths();
-  }
-
+class SavedPdfScreen extends StatelessWidget {
+  final _savedPdfController = Get.find<SavedPdfController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +17,8 @@ class _SavedPdfScreenState extends State<SavedPdfScreen> {
   }
 
   Widget get getBody {
-    if (_fileSystemEntitys == null) {
+    final _fileSystemEntitys = _savedPdfController.fileSystemEntitys;
+    if (!_savedPdfController.isFilesChecked) {
       return const Center(child: CircularProgressIndicator());
     } else if (_fileSystemEntitys.isEmpty) {
       return const Center(

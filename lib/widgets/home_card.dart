@@ -1,6 +1,6 @@
-import 'package:EasyScan/Utils/constants.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:EasyScan/Utils/constants.dart';
 
 class HomeCard extends StatelessWidget {
   final String text;

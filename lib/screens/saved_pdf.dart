@@ -32,9 +32,51 @@ class SavedPdfScreen extends StatelessWidget {
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, crossAxisSpacing: 4, mainAxisSpacing: 4),
         itemBuilder: (_, i) {
-          //TODO:make better card
           return GestureDetector(
             onTap: () => OpenFile.open(_fileSystemEntitys[i].path),
+            onLongPress: () {
+              showDialog(
+                  context: _,
+                  child: SimpleDialog(
+                    title: const Text("Do you want to"),
+                    children: [
+                      SimpleDialogOption(
+                        onPressed: () {
+                          _savedPdfController.share(i);
+                        },
+                        child: Row(
+                          children: const [
+                            Icon(
+                              Icons.share,
+                              color: primaryColor,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text("Share")
+                          ],
+                        ),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () {
+                          _savedPdfController.deleteFile(i);
+                        },
+                        child: Row(
+                          children: const [
+                            Icon(
+                              Icons.delete_outline,
+                              color: Colors.red,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text("Delete")
+                          ],
+                        ),
+                      )
+                    ],
+                  ));
+            },
             child: Container(
                 color: primaryColor.withOpacity(0.2),
                 margin: const EdgeInsets.all(10),

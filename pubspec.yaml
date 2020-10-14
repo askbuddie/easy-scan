@@ -18,6 +18,7 @@ dependencies:
   open_file: null
   pdf: ^1.10.0
   permission_handler: ^5.0.1+1
+  share: ^0.6.5+2
 
 dev_dependencies:
   lint: ^1.2.0

@@ -44,7 +44,10 @@ class _ImageToPdfState extends State<ImageToPdf> {
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: FloatingActionButton.extended(
                   heroTag: 'export',
-                  onPressed: () => exportPdf(_images),
+                  onPressed: () {
+                    exportPdf(_images);
+                    Navigator.of(context).pop();
+                  },
                   icon: const Icon(Icons.upload_file),
                   label: const Text('Export'),
                   backgroundColor: Colors.green,

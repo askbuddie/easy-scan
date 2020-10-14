@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/Utils/permission_checker.dart';
 import 'package:open_file/open_file.dart';
+import 'package:share/share.dart';
 
 class SavedPdfScreen extends StatefulWidget {
   @override
@@ -12,6 +13,31 @@ class SavedPdfScreen extends StatefulWidget {
 class _SavedPdfScreenState extends State<SavedPdfScreen> {
   List<dd.FileSystemEntity> _fileSystemEntitys = [];
   dd.Directory _savedDir;
+  Future<void> deleteFile({int index}) async {
+    final String filename = _fileSystemEntitys[index]
+        .toString()
+        .split('/')[4]
+        .toString()
+        .split("'")[0];
+    try {
+      final file = dd.File('storage/emulated/0/Easy Scan/$filename');
+      if (await file.exists()) {
+        await file.delete(recursive: true);
+      }
+    } catch (e) {
+      // error in getting access to the file
+    }
+  }
+
+  void share(int index) {
+    final String filename = _fileSystemEntitys[index]
+        .toString()
+        .split('/')[4]
+        .toString()
+        .split("'")[0];
+    Share.shareFiles(['storage/emulated/0/Easy Scan/$filename'], text: 'mypdf');
+  }
+
 //currrently supports only android
   Future<void> _getPaths() async {
     final _per = await permision.checkPermission();
@@ -64,12 +90,69 @@ class _SavedPdfScreenState extends State<SavedPdfScreen> {
           //TODO:make better card
           return GestureDetector(
             onTap: () => OpenFile.open(_fileSystemEntitys[i].path),
+            onLongPress: () {
+              showDialog(
+                context: _,
+                builder: (context) => SimpleDialog(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  children: [
+                    SimpleDialogOption(
+                      onPressed: () {
+                        share(i);
+                      },
+                      child: Row(
+                        children: const [
+                          Icon(
+                            Icons.share,
+                            color: primaryColor,
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text("Share"),
+                        ],
+                      ),
+                    ),
+                    SimpleDialogOption(
+                      onPressed: () {
+                        deleteFile(index: i);
+                        Navigator.of(context).pop();
+                        Navigator.pop(context);
+                      },
+                      child: Row(
+                        children: const [
+                          Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text("Delete"),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              );
+            },
             child: Container(
                 color: primaryColor.withOpacity(0.2),
                 margin: const EdgeInsets.all(10),
                 height: 200,
                 width: 200,
-                child: Center(child: Text("Pdf #${i + 1}"))),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const Icon(
+                      Icons.picture_as_pdf_sharp,
+                      color: primaryColor,
+                      size: 45,
+                    ),
+                    Center(child: Text("Pdf #${i + 1}")),
+                  ],
+                )),
           );
         },
         itemCount: _fileSystemEntitys.length,

@@ -1,7 +1,7 @@
+import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/controllers/scan_and_convert.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ScanAndConvert extends StatelessWidget {
   final _scanAndConvertController = Get.put(ScanAndConvertController())

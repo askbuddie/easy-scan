@@ -1,8 +1,7 @@
 import 'dart:io' as dd;
-
+import 'package:get/get.dart';
 import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/Utils/permission_checker.dart';
-import 'package:get/get.dart';
 
 class SavedPdfController extends GetxController {
   final _isFilesChecked = false.obs;

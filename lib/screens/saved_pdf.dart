@@ -1,8 +1,8 @@
+import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:open_file/open_file.dart';
 import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/controllers/saved_pdf.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:open_file/open_file.dart';
 
 class SavedPdfScreen extends StatelessWidget {
   final _savedPdfController = Get.find<SavedPdfController>();

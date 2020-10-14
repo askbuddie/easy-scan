@@ -1,7 +1,6 @@
 import 'dart:io';
-
-import 'package:EasyScan/Utils/methods.dart';
 import 'package:get/get.dart';
+import 'package:EasyScan/Utils/methods.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ScanAndConvertController extends GetxController {

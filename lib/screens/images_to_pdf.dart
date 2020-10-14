@@ -1,7 +1,7 @@
+import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/controllers/images_to_pdf.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ImageToPdf extends StatelessWidget {
   final _imageToPdfController = Get.put(ImageToPdfController());

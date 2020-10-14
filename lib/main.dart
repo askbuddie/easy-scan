@@ -1,8 +1,8 @@
-import 'package:EasyScan/Utils/constants.dart';
-import 'package:EasyScan/controllers/saved_pdf.dart';
-import 'package:EasyScan/screens/home_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:EasyScan/Utils/constants.dart';
+import 'package:EasyScan/screens/home_screen.dart';
+import 'package:EasyScan/controllers/saved_pdf.dart';
 
 void main() {
   runApp(MyApp());

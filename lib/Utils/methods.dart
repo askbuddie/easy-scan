@@ -1,12 +1,12 @@
 import 'dart:io';
 import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart';
 import 'package:get/get.dart';
+import 'package:pdf/widgets.dart';
 import 'package:EasyScan/Utils/constants.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:flutter/material.dart' as material;
-import 'package:EasyScan/Utils/permission_checker.dart';
 import 'package:EasyScan/controllers/saved_pdf.dart';
+import 'package:EasyScan/Utils/permission_checker.dart';
 
 Future cropImage(String imagepath, Function(String) onCrop) async {
   final File croppedFile = await ImageCropper.cropImage(

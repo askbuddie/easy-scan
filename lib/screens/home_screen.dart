@@ -1,9 +1,10 @@
+import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/screens/saved_pdf.dart';
-import 'package:EasyScan/screens/ocr.dart';
-import 'package:flutter/material.dart';
 import 'package:EasyScan/widgets/home_card.dart';
 import 'package:EasyScan/screens/images_to_pdf.dart';
 import 'package:EasyScan/screens/scan_and_convert.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -23,34 +24,36 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
       ),
       body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            HomeCard(
-              onTap: () => Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => ScanAndConvert())),
-              iconData: Icons.image_search,
-              text: 'Scan and convert',
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          HomeCard(
+            onTap: () => Get.to(ScanAndConvert()),
+            iconData: Icons.image_search,
+            text: 'Scan and convert',
+          ),
+          HomeCard(
+            onTap: () => Get.to(ImageToPdf()),
+            iconData: Icons.picture_as_pdf_outlined,
+            text: 'Images to Pdf',
+          ),
+          HomeCard(
+            onTap: () => Get.to(SavedPdfScreen()),
+            iconData: Icons.save_rounded,
+            text: 'History',
+          ),
+          const Spacer(),
+          Container(
+            color: primaryColor,
+            child: const Text(
+              //TODO:use package info to get actual version and build number
+              'V1.0(1)',
+              style: TextStyle(color: Colors.white),
+              textAlign: TextAlign.center,
             ),
-            HomeCard(
-              onTap: () => Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => ImageToPdf())),
-              iconData: Icons.picture_as_pdf_outlined,
-              text: 'Images to Pdf',
-            ),
-            HomeCard(
-              onTap: () => Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => OCR())),
-              iconData: Icons.picture_as_pdf_outlined,
-              text: 'Text Recognition ',
-            ),
-            HomeCard(
-              onTap: () => Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => SavedPdfScreen())),
-              iconData: Icons.save_rounded,
-              text: 'History',
-            ),
-          ]),
+          ),
+        ],
+      ),
     );
   }
 }

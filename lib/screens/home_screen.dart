@@ -1,17 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/screens/saved_pdf.dart';
 import 'package:EasyScan/widgets/home_card.dart';
 import 'package:EasyScan/screens/images_to_pdf.dart';
 import 'package:EasyScan/screens/scan_and_convert.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

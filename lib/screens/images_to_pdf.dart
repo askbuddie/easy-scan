@@ -1,63 +1,37 @@
-import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:EasyScan/Utils/constants.dart';
-import 'package:EasyScan/Utils/methods.dart';
+import 'package:EasyScan/controllers/images_to_pdf.dart';
 
-import 'package:flutter/material.dart';
-
-import 'package:image_picker/image_picker.dart';
-
-class ImageToPdf extends StatefulWidget {
-  @override
-  _ImageToPdfState createState() => _ImageToPdfState();
-}
-
-class _ImageToPdfState extends State<ImageToPdf> {
-  final List<File> _images = [];
-  final ImagePicker _picker = ImagePicker();
-  Future getImageFromGallery() async {
-    final PickedFile pickedFile =
-        await _picker.getImage(source: ImageSource.gallery);
-    if (pickedFile != null && pickedFile.path != "") {
-      if (_cropImage) {
-        cropImage(pickedFile.path, (path) {
-          addImage(path);
-        });
-      } else {
-        addImage(pickedFile.path);
-      }
-    }
-  }
-
-  void addImage(String path) => setState(() {
-        _images.add(File(path));
-      });
-  bool _cropImage = false;
+class ImageToPdf extends StatelessWidget {
+  final imageToPdfController = Get.put(ImageToPdfController());
   @override
   Widget build(BuildContext context) {
+    final images = imageToPdfController.images;
     return Scaffold(
-        floatingActionButton: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            if (_images.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
-                child: FloatingActionButton.extended(
-                  heroTag: 'export',
-                  onPressed: () => exportPdf(_images),
-                  icon: const Icon(Icons.upload_file),
-                  label: const Text('Export'),
-                  backgroundColor: Colors.green,
+        floatingActionButton: Obx(() => Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                if (images.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: FloatingActionButton.extended(
+                      heroTag: 'export',
+                      onPressed: imageToPdfController.exportToPdf,
+                      icon: const Icon(Icons.upload_file),
+                      label: const Text('Export'),
+                      backgroundColor: Colors.green,
+                    ),
+                  ),
+                FloatingActionButton.extended(
+                  heroTag: 'addimg',
+                  onPressed: imageToPdfController.getImageFromGallery,
+                  icon: const Icon(Icons.add),
+                  label: const Text('Add image'),
                 ),
-              ),
-            FloatingActionButton.extended(
-              heroTag: 'addimg',
-              onPressed: getImageFromGallery,
-              icon: const Icon(Icons.add),
-              label: const Text('Add image'),
-            ),
-          ],
-        ),
+              ],
+            )),
         appBar: AppBar(
           title: const Text(
             'Choose Image',
@@ -68,26 +42,24 @@ class _ImageToPdfState extends State<ImageToPdf> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              CheckboxListTile(
+              Obx(() => CheckboxListTile(
                   checkColor: secondaryColor,
                   title: const Text('Crop Image',
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
-                  value: _cropImage,
+                  value: imageToPdfController.shouldCropImage.value,
                   onChanged: (crop) {
-                    setState(() {
-                      _cropImage = crop;
-                    });
-                  }),
-              Expanded(child: _buildImageList(context)),
+                    imageToPdfController.shouldCropImage.value = crop;
+                  })),
+              Obx(() => Expanded(child: _buildImageList(images))),
               //TODO:make ui better
             ],
           ),
         ));
   }
 
-  Widget _buildImageList(BuildContext context) {
-    if (_images.isEmpty) {
+  Widget _buildImageList(RxList images) {
+    if (images.isEmpty) {
       return const Center(
         child: Text('Insert a Image'),
       );
@@ -95,14 +67,14 @@ class _ImageToPdfState extends State<ImageToPdf> {
     return GridView.builder(
         gridDelegate:
             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-        itemCount: _images.length,
+        itemCount: images.length,
         itemBuilder: (context, index) {
           return GestureDetector(
             onLongPress: () {},
             child: Stack(fit: StackFit.expand, children: [
               Card(
                 child: Image.file(
-                  _images[index],
+                  images[index],
                   fit: BoxFit.fill,
                 ),
               ),
@@ -115,8 +87,7 @@ class _ImageToPdfState extends State<ImageToPdf> {
                     color: Colors.red,
                   ),
                   onPressed: () {
-                    _images.removeAt(index);
-                    setState(() {});
+                    imageToPdfController.removeImage(index);
                   },
                 ),
               )

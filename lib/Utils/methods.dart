@@ -1,10 +1,12 @@
 import 'dart:io';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
+import 'package:get/get.dart';
 import 'package:EasyScan/Utils/constants.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:EasyScan/Utils/permission_checker.dart';
+import 'package:EasyScan/controllers/saved_pdf.dart';
 
 Future cropImage(String imagepath, Function(String) onCrop) async {
   final File croppedFile = await ImageCropper.cropImage(
@@ -43,6 +45,14 @@ Future cropImage(String imagepath, Function(String) onCrop) async {
 
 void exportPdf(List<File> images) {
   final Document pdf = Document();
+  final fileToImage = images
+      .map((image) => Image(
+          PdfImage.file(
+            pdf.document,
+            bytes: image.readAsBytesSync(),
+          ),
+          height: 500))
+      .toList();
   //TODO:make better ui
   pdf.addPage(MultiPage(
       pageFormat: PdfPageFormat.a4.copyWith(
@@ -69,15 +79,7 @@ void exportPdf(List<File> images) {
           ),
         );
       },
-      build: (Context context) => <Widget>[
-            for (var i = 0; i < images.length; i++)
-              Image(
-                  PdfImage.file(
-                    pdf.document,
-                    bytes: images[i].readAsBytesSync(),
-                  ),
-                  height: 500)
-          ]));
+      build: (Context context) => <Widget>[...fileToImage]));
   savePdf(pdf);
 }
 
@@ -97,6 +99,7 @@ Future<String> savePdf(Document pdf) async {
     await file.create(recursive: true);
     final data = pdf.save();
     await file.writeAsBytes(data);
+    Get.find<SavedPdfController>().refreshFiles();
     return file.path;
   }
   return null;

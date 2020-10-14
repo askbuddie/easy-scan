@@ -1,41 +1,12 @@
-import 'dart:io' as dd;
 import 'package:flutter/material.dart';
-import 'package:EasyScan/Utils/constants.dart';
-import 'package:EasyScan/Utils/permission_checker.dart';
+import 'package:get/get.dart';
 import 'package:open_file/open_file.dart';
 
-class SavedPdfScreen extends StatefulWidget {
-  @override
-  _SavedPdfScreenState createState() => _SavedPdfScreenState();
-}
+import 'package:EasyScan/Utils/constants.dart';
+import 'package:EasyScan/controllers/saved_pdf.dart';
 
-class _SavedPdfScreenState extends State<SavedPdfScreen> {
-  List<dd.FileSystemEntity> _fileSystemEntitys = [];
-  dd.Directory _savedDir;
-//currrently supports only android
-  Future<void> _getPaths() async {
-    final _per = await permision.checkPermission();
-    if (_per) {
-      _savedDir = dd.Directory(pdfPathAndroid);
-      setState(() {});
-      final _exist = await _savedDir.exists();
-      if (_exist) await _getFileList();
-    }
-  }
-
-  Future<void> _getFileList() async {
-    if (_savedDir != null) {
-      _fileSystemEntitys = _savedDir.listSync();
-      setState(() {});
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _getPaths();
-  }
-
+class SavedPdfScreen extends StatelessWidget {
+  final savedPdfController = Get.find<SavedPdfController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,9 +18,10 @@ class _SavedPdfScreenState extends State<SavedPdfScreen> {
   }
 
   Widget get getBody {
-    if (_fileSystemEntitys == null) {
+    final fileSystemEntitys = savedPdfController.fileSystemEntitys;
+    if (!savedPdfController.isFilesChecked) {
       return const Center(child: CircularProgressIndicator());
-    } else if (_fileSystemEntitys.isEmpty) {
+    } else if (fileSystemEntitys.isEmpty) {
       return const Center(
         child: Text(
           'No history found',
@@ -63,7 +35,7 @@ class _SavedPdfScreenState extends State<SavedPdfScreen> {
         itemBuilder: (_, i) {
           //TODO:make better card
           return GestureDetector(
-            onTap: () => OpenFile.open(_fileSystemEntitys[i].path),
+            onTap: () => OpenFile.open(fileSystemEntitys[i].path),
             child: Container(
                 color: primaryColor.withOpacity(0.2),
                 margin: const EdgeInsets.all(10),
@@ -72,7 +44,7 @@ class _SavedPdfScreenState extends State<SavedPdfScreen> {
                 child: Center(child: Text("Pdf #${i + 1}"))),
           );
         },
-        itemCount: _fileSystemEntitys.length,
+        itemCount: fileSystemEntitys.length,
       );
     }
   }

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:EasyScan/Utils/constants.dart';
-import 'package:EasyScan/screens/saved_pdf.dart';
+import 'package:EasyScan/screens/history.dart';
 import 'package:EasyScan/widgets/home_card.dart';
 import 'package:EasyScan/screens/images_to_pdf.dart';
 import 'package:EasyScan/screens/scan_and_convert.dart';

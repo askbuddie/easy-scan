@@ -1,4 +1,5 @@
 import 'dart:io' as dd;
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/Utils/permission_checker.dart';
@@ -49,5 +50,9 @@ class SavedPdfController extends GetxController {
 
   void share(int index) {
     Share.shareFiles([fileSystemEntitys[index].path], text: 'mypdf');
+  }
+
+  void toastMsg(String msg) {
+    Fluttertoast.showToast(msg: msg, gravity: ToastGravity.BOTTOM);
   }
 }

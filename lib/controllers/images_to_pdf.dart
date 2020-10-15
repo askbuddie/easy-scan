@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:EasyScan/Utils/methods.dart';
 import 'package:image_picker/image_picker.dart';
@@ -27,4 +28,7 @@ class ImageToPdfController extends GetxController {
   }
 
   void removeImage(int index) => _images.removeAt(index);
+  void toastMsg(String msg) {
+    Fluttertoast.showToast(msg: msg, gravity: ToastGravity.BOTTOM);
+  }
 }

@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:EasyScan/Utils/constants.dart';
-import 'package:EasyScan/screens/home_screen.dart';
-import 'package:EasyScan/controllers/saved_pdf.dart';
+import 'package:EasyScan/screens/home.dart';
+import 'package:EasyScan/controllers/pdf.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,10 +13,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       onInit: () {
-        Get.put(SavedPdfController());
+        Get.put(PdfController());
       },
       onDispose: () {
-        Get.delete<SavedPdfController>();
+        Get.delete<PdfController>();
       },
       debugShowCheckedModeBanner: false,
       title: 'EasyScan',

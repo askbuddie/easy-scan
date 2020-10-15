@@ -3,9 +3,9 @@ import 'package:pdf/pdf.dart';
 import 'package:get/get.dart';
 import 'package:pdf/widgets.dart';
 import 'package:EasyScan/Utils/constants.dart';
+import 'package:EasyScan/controllers/pdf.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:flutter/material.dart' as material;
-import 'package:EasyScan/controllers/saved_pdf.dart';
 import 'package:EasyScan/Utils/permission_checker.dart';
 
 Future cropImage(String imagepath, Function(String) onCrop) async {
@@ -99,7 +99,7 @@ Future<String> savePdf(Document pdf) async {
     await file.create(recursive: true);
     final data = pdf.save();
     await file.writeAsBytes(data);
-    Get.find<SavedPdfController>().refreshFiles();
+    Get.find<PdfController>().refreshFiles();
     return file.path;
   }
   return null;

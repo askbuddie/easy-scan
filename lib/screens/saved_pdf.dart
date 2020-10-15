@@ -32,7 +32,6 @@ class SavedPdfScreen extends StatelessWidget {
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, crossAxisSpacing: 4, mainAxisSpacing: 4),
         itemBuilder: (_, i) {
-          //TODO:make better card
           return GestureDetector(
               onTap: () => OpenFile.open(_fileSystemEntitys[i].path),
               child: pdfs[i]);

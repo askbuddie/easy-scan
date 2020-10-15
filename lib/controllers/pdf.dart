@@ -7,6 +7,7 @@ import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/widgets/history_card.dart';
 import 'package:EasyScan/Utils/permission_checker.dart';
 import 'package:native_pdf_renderer/native_pdf_renderer.dart';
+import 'package:share/share.dart';
 
 class PdfController extends GetxController {
   final _isFilesChecked = false.obs;
@@ -39,6 +40,19 @@ class PdfController extends GetxController {
       _savedDir = dd.Directory(pdfPathAndroid);
       final _exist = await _savedDir.exists();
       if (_exist) await _getFileList();
+    }
+  }
+
+  void share({int index}) {
+    Share.shareFiles([fileSystemEntitys[index].path], text: 'mypdf');
+  }
+
+  Future<void> deleteFile(int index) async {
+    try {
+      final file = dd.File(fileSystemEntitys[index].path);
+      file.delete(recursive: false);
+    } catch (e) {
+      //error will be here
     }
   }
 

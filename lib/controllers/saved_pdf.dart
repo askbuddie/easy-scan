@@ -1,14 +1,14 @@
 import 'dart:io' as dd;
 import 'dart:typed_data';
-import 'package:EasyScan/widgets/history_card.dart';
-import 'package:path/path.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:EasyScan/Utils/constants.dart';
+import 'package:EasyScan/widgets/history_card.dart';
 import 'package:EasyScan/Utils/permission_checker.dart';
 import 'package:native_pdf_renderer/native_pdf_renderer.dart';
 
-class SavedPdfController extends GetxController {
+class PdfController extends GetxController {
   final _isFilesChecked = false.obs;
   final fileSystemEntitys = <dd.FileSystemEntity>[].obs;
   List<Widget> _pdfWidgets;

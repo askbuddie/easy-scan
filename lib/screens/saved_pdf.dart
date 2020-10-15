@@ -4,7 +4,7 @@ import 'package:open_file/open_file.dart';
 import 'package:EasyScan/controllers/saved_pdf.dart';
 
 class SavedPdfScreen extends StatelessWidget {
-  final _savedPdfController = Get.find<SavedPdfController>();
+  final _savedPdfController = Get.find<PdfController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

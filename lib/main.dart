@@ -13,10 +13,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       onInit: () {
-        Get.put(SavedPdfController());
+        Get.put(PdfController());
       },
       onDispose: () {
-        Get.delete<SavedPdfController>();
+        Get.delete<PdfController>();
       },
       debugShowCheckedModeBanner: false,
       title: 'EasyScan',

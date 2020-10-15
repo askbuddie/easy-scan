@@ -99,7 +99,7 @@ Future<String> savePdf(Document pdf) async {
     await file.create(recursive: true);
     final data = pdf.save();
     await file.writeAsBytes(data);
-    Get.find<SavedPdfController>().refreshFiles();
+    Get.find<PdfController>().refreshFiles();
     return file.path;
   }
   return null;

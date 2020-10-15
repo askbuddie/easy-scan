@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
-import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/controllers/saved_pdf.dart';
 
 class SavedPdfScreen extends StatelessWidget {
@@ -18,6 +17,7 @@ class SavedPdfScreen extends StatelessWidget {
 
   Widget get getBody {
     final _fileSystemEntitys = _savedPdfController.fileSystemEntitys;
+    final pdfs = _savedPdfController.pdfs;
     if (!_savedPdfController.isFilesChecked) {
       return const Center(child: CircularProgressIndicator());
     } else if (_fileSystemEntitys.isEmpty) {
@@ -34,14 +34,8 @@ class SavedPdfScreen extends StatelessWidget {
         itemBuilder: (_, i) {
           //TODO:make better card
           return GestureDetector(
-            onTap: () => OpenFile.open(_fileSystemEntitys[i].path),
-            child: Container(
-                color: primaryColor.withOpacity(0.2),
-                margin: const EdgeInsets.all(10),
-                height: 200,
-                width: 200,
-                child: Center(child: Text("Pdf #${i + 1}"))),
-          );
+              onTap: () => OpenFile.open(_fileSystemEntitys[i].path),
+              child: pdfs[i]);
         },
         itemCount: _fileSystemEntitys.length,
       );

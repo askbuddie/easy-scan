@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
 import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/controllers/saved_pdf.dart';
+import 'package:EasyScan/widgets/simple_option.dart';
 
 class SavedPdfScreen extends StatelessWidget {
   final _savedPdfController = Get.find<SavedPdfController>();
@@ -72,20 +73,5 @@ class SavedPdfScreen extends StatelessWidget {
         itemCount: _fileSystemEntitys.length,
       );
     }
-  }
-
-  Row optionRow({IconData iconData, String title, Color color}) {
-    return Row(
-      children: [
-        Icon(
-          iconData,
-          color: color,
-        ),
-        const SizedBox(
-          width: 20,
-        ),
-        Text(title)
-      ],
-    );
   }
 }

@@ -37,11 +37,6 @@ class SavedPdfController extends GetxController {
   }
 
   Future<void> deleteFile(int index) async {
-    // final String filename = fileSystemEntitys[index]
-    //     .toString()
-    //     .split('/')[4]
-    //     .toString()
-    //     .split("'")[0];
     try {
       final file = dd.File(fileSystemEntitys[index].path);
       if (await file.exists()) {

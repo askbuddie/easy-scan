@@ -1,4 +1,5 @@
 import 'package:EasyScan/screens/home_screen.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
@@ -55,6 +56,9 @@ class SavedPdfScreen extends StatelessWidget {
                           onPressed: () {
                             _savedPdfController.deleteFile(i);
                             _savedPdfController.refreshFiles();
+                            Fluttertoast.showToast(
+                                msg: "Pdf has been deleted",
+                                gravity: ToastGravity.BOTTOM);
                             Get.to(HomeScreen());
                           },
                           child: const SimpleDlgOption(

@@ -1,4 +1,5 @@
 import 'package:EasyScan/screens/home_screen.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:EasyScan/Utils/constants.dart';
@@ -20,6 +21,10 @@ class ImageToPdf extends StatelessWidget {
                       heroTag: 'export',
                       onPressed: () {
                         _imageToPdfController.exportToPdf();
+                        Fluttertoast.showToast(
+                            msg: "Pdf has been created",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM);
                         Get.to(HomeScreen());
                       },
                       icon: const Icon(Icons.upload_file),

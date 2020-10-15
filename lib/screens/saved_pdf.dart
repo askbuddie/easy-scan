@@ -45,7 +45,7 @@ class SavedPdfScreen extends StatelessWidget {
                         onPressed: () {
                           _savedPdfController.share(i);
                         },
-                        child: optionRow(
+                        child: const SimpleDlgOption(
                             title: "Share",
                             iconData: Icons.share_outlined,
                             color: primaryColor),
@@ -54,17 +54,10 @@ class SavedPdfScreen extends StatelessWidget {
                           onPressed: () {
                             _savedPdfController.deleteFile(i);
                           },
-                          child: Row(
-                            children: const [
-                              Icon(
-                                Icons.delete_outline_sharp,
-                                color: Colors.red,
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text("Delete")
-                            ],
+                          child: const SimpleDlgOption(
+                            color: Colors.red,
+                            title: "Delete",
+                            iconData: Icons.delete_outline_sharp,
                           ))
                     ],
                   ));

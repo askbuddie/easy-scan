@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
 
-Row optionRow({IconData iconData, String title, Color color}) => Row(
+class SimpleDlgOption extends StatelessWidget {
+  final String title;
+  final Color color;
+  final IconData iconData;
+  const SimpleDlgOption({
+    this.title,
+    this.color,
+    this.iconData,
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
       children: [
         Icon(
-          iconData,
+          Icons.delete_outline_sharp,
           color: color,
         ),
         const SizedBox(
@@ -12,3 +25,5 @@ Row optionRow({IconData iconData, String title, Color color}) => Row(
         Text(title)
       ],
     );
+  }
+}

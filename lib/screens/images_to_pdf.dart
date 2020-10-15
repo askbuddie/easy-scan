@@ -1,3 +1,4 @@
+import 'package:EasyScan/screens/home_screen.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:EasyScan/Utils/constants.dart';
@@ -17,7 +18,10 @@ class ImageToPdf extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: FloatingActionButton.extended(
                       heroTag: 'export',
-                      onPressed: _imageToPdfController.exportToPdf,
+                      onPressed: () {
+                        _imageToPdfController.exportToPdf();
+                        Get.to(HomeScreen());
+                      },
                       icon: const Icon(Icons.upload_file),
                       label: const Text('Export'),
                       backgroundColor: Colors.green,

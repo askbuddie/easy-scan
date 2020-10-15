@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:EasyScan/Utils/constants.dart';
 import 'package:EasyScan/screens/home.dart';
-import 'package:EasyScan/controllers/saved_pdf.dart';
+import 'package:EasyScan/controllers/pdf.dart';
 
 void main() {
   runApp(MyApp());

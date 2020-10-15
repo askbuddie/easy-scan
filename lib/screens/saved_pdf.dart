@@ -51,14 +51,21 @@ class SavedPdfScreen extends StatelessWidget {
                             color: primaryColor),
                       ),
                       SimpleDialogOption(
-                        onPressed: () {
-                          _savedPdfController.deleteFile(i);
-                        },
-                        child: optionRow(
-                            title: "Delete",
-                            color: Colors.red,
-                            iconData: Icons.delete_outline_outlined),
-                      )
+                          onPressed: () {
+                            _savedPdfController.deleteFile(i);
+                          },
+                          child: Row(
+                            children: const [
+                              Icon(
+                                Icons.delete_outline_sharp,
+                                color: Colors.red,
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text("Delete")
+                            ],
+                          ))
                     ],
                   ));
             },

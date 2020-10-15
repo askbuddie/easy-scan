@@ -18,7 +18,9 @@ dependencies:
   image_picker: ^0.6.7+4
   native_pdf_renderer: ^2.3.2
   permission_handler: ^5.0.1+1
-  flutter_image_editor: ^1.2.0
+  flutter_image_editor: ^1.2.0  
+  share: ^0.6.5+2
+  fluttertoast: ^7.1.1
 
 
 dev_dependencies:

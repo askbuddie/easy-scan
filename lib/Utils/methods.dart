@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pdf/pdf.dart';
 import 'package:get/get.dart';
 import 'package:pdf/widgets.dart';
@@ -41,6 +42,10 @@ Future cropImage(String imagepath, Function(String) onCrop) async {
   if (croppedFile != null) {
     onCrop(croppedFile.path);
   }
+}
+
+void showToast(String msg) {
+  Fluttertoast.showToast(msg: msg, gravity: ToastGravity.BOTTOM);
 }
 
 void exportPdf(List<File> images) {

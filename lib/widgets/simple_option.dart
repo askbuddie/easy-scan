@@ -16,7 +16,7 @@ class SimpleDlgOption extends StatelessWidget {
     return Row(
       children: [
         Icon(
-          Icons.delete_outline_sharp,
+          iconData,
           color: color,
         ),
         const SizedBox(
